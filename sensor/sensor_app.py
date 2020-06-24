@@ -7,6 +7,7 @@ from house_info import HouseInfo
 from temperature_info import TemperatureData
 from humidity_info import HumidityData
 from particle_count_info import ParticleData
+from energy_info import EnergyData
 
 ##############################
 # Do not remove these two lines
@@ -31,33 +32,42 @@ print('House sensor records for date {} = {}'.format(test_date.strftime('%d/%m/%
 # Module 3 code here:
 temperature_data = TemperatureData(data)
 recs = temperature_data.get_data_by_area(rec_area=test_area)
-print('\nHouse temperature records for area {} = {}'.format(test_area, len(recs)))
+print('\nHouse temperature sensor records for area {} = {}'.format(test_area, len(recs)))
 print('\tMaximum: {0}, Minimum: {1} temperature'.format(max(recs), min(recs)))
 recs = temperature_data.get_data_by_date(rec_date=test_date)
-print('House temperature records for date {} = {}'.format(test_date.strftime('%d/%m/%Y'), len(recs)))
+print('House temperature sensor records for date {} = {}'.format(test_date.strftime('%d/%m/%Y'), len(recs)))
 print('\tMaximum: {0}, Minimum: {1} temperature'.format(max(recs), min(recs)))
 
 # Module 4 code here:
 humidity_data = HumidityData(data)
 recs = humidity_data.get_data_by_area(rec_area=test_area)
-print('\nHouse humidity records for area {} = {}'.format(test_area, len(recs)))
+print('\nHouse humidity sensor records for area {} = {}'.format(test_area, len(recs)))
 print('\tAverage: {}% humidity'.format(mean(recs)))
 recs = humidity_data.get_data_by_date(rec_date=test_date)
-print('House humidity records for date {} = {}'.format(test_date.strftime('%d/%m/%Y'), len(recs)))
+print('House humidity sensor records for date {} = {}'.format(test_date.strftime('%d/%m/%Y'), len(recs)))
 print('\tAverage: {}% humidity'.format(mean(recs)))
 
 particle_data = ParticleData(data)
 recs = particle_data.get_data_by_area(rec_area=test_area)
 concentrations = particle_data.get_data_concentrations(data=recs)
-print('\nHouse sensor records for area {} = {}'.format(test_area, len(recs)))
+print('\nHouse Particle sensor records for area {} = {}'.format(test_area, len(recs)))
 print('\tGood Air Quality Recs: {}'.format(concentrations['good']))
 print('\tModerate Air Quality Recs: {}'.format(concentrations['moderate']))
 print('\tBad Air Quality Recs: {}'.format(concentrations['bad']))
 recs = particle_data.get_data_by_date(rec_date=test_date)
 concentrations = particle_data.get_data_concentrations(data=recs)
-print('\nHouse sensor records for date {} = {}'.format(test_datestrftim('%d/%m/%Y'), len(recs)))
+print('\nHouse Particle sensor records for date {} = {}'.format(test_date.strftime('%d/%m/%Y'), len(recs)))
 print('\tGood Air Quality Recs: {}'.format(concentrations['good']))
 print('\tModerate Air Quality Recs: {}'.format(concentrations['moderate']))
 print('\tBad Air Quality Recs: {}'.format(concentrations['bad']))
 
 # Module 5 code here:
+energy_data = EnergyData(data)
+recs = energy_data.get_data_by_area(rec_area=test_area)
+total_energy = energy_data.calculate_energy_usage(data=recs)
+print('\nHouse Energy sensor records for area {} = {}'.format(test_area, len(recs)))
+print('\tEnergyUsage:{:2.2} Watts'.format(total_energy))
+recs = energy_data.get_data_by_date(rec_date=test_date)
+total_energy = energy_data.calculate_energy_usage(data=recs)
+print('\nHouse Energy sensor records for date {} = {}'.format(test_date.strftime('%d/%m/%Y'), len(recs)))
+print('\tEnergyUsage:{:2.2} Watts'.format(total_energy))
